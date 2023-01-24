@@ -1,4 +1,4 @@
-# settings.py
+import datetime
 
 BOT_NAME = 'scrapy_demo'
 
@@ -18,5 +18,10 @@ DOWNLOADER_MIDDLEWARES = {
 'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
 'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
 }
+
+# Add FEED_URI setting
+FEED_FORMAT = 'csv'
+the_argument = getattr(settings, 'the_argument', None)
+FEED_URI = 'output/{}_{}.csv'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), the_argument) if the_argument else 'output/{}.csv'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 
